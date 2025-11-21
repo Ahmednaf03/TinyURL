@@ -20,15 +20,6 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 4000;
 
-// --- DB connection (Neon) ---
-const pool = new Pool({
-  connectionString: process.env.DB_URL,
-  ssl: { rejectUnauthorized: false }, // Neon needs SSL
-});
-
-
-
-
 
 
 app.listen(PORT, () => {
