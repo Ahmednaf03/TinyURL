@@ -10,6 +10,14 @@ console.log("ENV:", process.env.DB_URL);
 
 
 const app = express();
+app.use(cors(
+    {
+        origin: 'http://localhost:3000',
+        credentials: true,
+    }
+));
+app.use(express.json());
+
 const PORT = process.env.PORT || 4000;
 
 // --- DB connection (Neon) ---
