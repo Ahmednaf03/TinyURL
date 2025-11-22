@@ -1,13 +1,14 @@
 const express = require('express');
 const pool = require('../db/db');
-const isValidUrl = require('../utils/isValidUrl');
+const isValidUrl = require('../utils/validateURL');
 const { nanoid } = require('nanoid');
 
 const router = express.Router();
 
 router.post("/", async (req, res )=>{
     const { longUrl } = req.body;
-
+    console.log(req.body);
+    
     if(!longUrl){
         return res.status(400).json({ error: "URL is required" });
     }
@@ -22,7 +23,7 @@ router.post("/", async (req, res )=>{
             `INSERT INTO urls (code, original_url)
              VALUES ($1, $2)
              RETURNING id, code, original_url, visit_count, created_at`,
-      [code, url]
+      [code, longUrl]
         );
 
         const row = rows[0]
@@ -54,7 +55,13 @@ router.get("/", async (req,res) =>{
             createdAt : row.created_at,
             shortUrl : `${req.protocol}:// ${req.get("host")}/${row.code}`
         }))
+         if (rows.length === 0) {
+        res.json({ error: "No URLs found" });
+      }else {
         res.json(data);
+      }
+        
+     
     } catch (error) {
         console.log("error while fetching all the URL");
         res.status(500).json({ error: "Server error when fetching list" });

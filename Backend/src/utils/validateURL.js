@@ -1,6 +1,6 @@
 let isValidURL = (url) =>{
     try {
-        new URL(str);
+        new URL(url);
         return true;
     } catch (error) {
         console.log("URL invalid");
