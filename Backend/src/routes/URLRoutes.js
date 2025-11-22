@@ -1,6 +1,6 @@
 const express = require('express');
-const pool = require('../db/db');
-const isValidUrl = require('../utils/validateURL');
+const pool = require('../db/db.js');
+const isValidUrl = require('../utils/validateURL.js');
 const { nanoid } = require('nanoid');
 
 const router = express.Router();
