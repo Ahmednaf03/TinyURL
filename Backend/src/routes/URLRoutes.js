@@ -6,13 +6,13 @@ const { nanoid } = require('nanoid');
 const router = express.Router();
 
 router.post("/", async (req, res )=>{
-    const { longUrl } = req.body;
-    console.log(req.body);
+    const { url } = req.body;
+    console.log("Received longUrl:", url);
     
-    if(!longUrl){
+    if(!url){
         return res.status(400).json({ error: "URL is required" });
     }
-    if(!isValidUrl(longUrl)){
+    if(!isValidUrl(url)){
         return res.status(400).json({ error: "Invalid URL" });
     }
 
@@ -23,7 +23,7 @@ router.post("/", async (req, res )=>{
             `INSERT INTO urls (code, original_url)
              VALUES ($1, $2)
              RETURNING id, code, original_url, visit_count, created_at`,
-      [code, longUrl]
+      [code, url]
         );
 
         const row = rows[0]
