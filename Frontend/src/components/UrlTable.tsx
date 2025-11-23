@@ -4,7 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 export default function UrlTable({ urls, refresh }: { urls: UrlItem[]; refresh: () => void }) {
   const navigate = useNavigate();
-
+  urls.map((u)=>{
+    console.log(u.shortUrl);
+    
+  })
   async function handleDelete(code: string) {
     await deleteUrl(code);
     refresh();
@@ -30,10 +33,13 @@ export default function UrlTable({ urls, refresh }: { urls: UrlItem[]; refresh: 
         </thead>
         <tbody>
           {urls.map((u) => (
+            
+            
+            
             <tr key={u.code} className="border-b">
               <td className="p-3">
-                <a href={u.shortUrl.trim()} target="_blank" className="text-blue-600 hover:underline">
-                  {u.shortUrl.trim()}
+                <a href={u.shortUrl} target="_blank" className="text-blue-600 hover:underline">
+                  {u.shortUrl}
                 </a>
               </td>
 

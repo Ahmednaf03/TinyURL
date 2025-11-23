@@ -33,7 +33,7 @@ router.post("/", async (req, res )=>{
             longUrl : row.long_url,
             visitCount : row.visit_count,
             createdAt : row.created_at,
-            shortUrl : `${req.protocol}://${req.get("host")}/${row.code}`.trim()
+            shortUrl : `${req.protocol}://${req.get("host")}/${row.code}`
         })
     } catch (error) {
         console.log("error when creating url",error);
@@ -53,7 +53,7 @@ router.get("/", async (req,res) =>{
             originalUrl : row.original_url,
             visitCount : row.visit_count,
             createdAt : row.created_at,
-            shortUrl : `${req.protocol}:// ${req.get("host")}/${row.code}`
+            shortUrl : `${req.protocol}://${req.get("host")}/${row.code}`
         }))
          if (rows.length === 0) {
         res.json({ error: "No URLs found" });
