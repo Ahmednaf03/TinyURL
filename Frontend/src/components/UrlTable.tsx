@@ -1,6 +1,6 @@
 import { deleteUrl } from "../utils/urls";
 import type { UrlItem } from "../types/types";
-import { Router, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 
 export default function UrlTable({ urls, refresh, update }: { urls: UrlItem[]; refresh: () => void, update: () => void }) {
