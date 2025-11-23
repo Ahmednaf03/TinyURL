@@ -5,10 +5,7 @@ import {  useNavigate } from "react-router-dom";
 
 export default function UrlTable({ urls, refresh, update }: { urls: UrlItem[]; refresh: () => void, update: () => void }) {
   const navigate = useNavigate();
-  urls.map((u)=>{
-    console.log(u.shortUrl);
-    
-  })
+ 
  
   async function handleDelete(code: string) {
     await deleteUrl(code);

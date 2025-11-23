@@ -17,8 +17,7 @@ function App() {
   }
 
   async function triggerUpdate() {
-    const data = await getUrls();
-    setUrls(data);
+    await load();
   }
 
   useEffect(() =>{
