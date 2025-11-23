@@ -1,13 +1,15 @@
 import { deleteUrl } from "../utils/urls";
 import type { UrlItem } from "../types/types";
-import { useNavigate } from "react-router-dom";
+import { Router, useNavigate } from "react-router-dom";
 
-export default function UrlTable({ urls, refresh }: { urls: UrlItem[]; refresh: () => void }) {
+
+export default function UrlTable({ urls, refresh, update }: { urls: UrlItem[]; refresh: () => void, update: () => void }) {
   const navigate = useNavigate();
   urls.map((u)=>{
     console.log(u.shortUrl);
     
   })
+ 
   async function handleDelete(code: string) {
     await deleteUrl(code);
     refresh();
@@ -38,7 +40,8 @@ export default function UrlTable({ urls, refresh }: { urls: UrlItem[]; refresh: 
             
             <tr key={u.code} className="border-b">
               <td className="p-3">
-                <a href={u.shortUrl} target="_blank" className="text-blue-600 hover:underline">
+                <a href={u.shortUrl} target="_blank" className="text-blue-600 hover:underline"
+                onClick={()=>{update()}}>
                   {u.shortUrl}
                 </a>
               </td>

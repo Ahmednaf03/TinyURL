@@ -10,9 +10,15 @@ function App() {
   const [urls, setUrls] = useState<UrlItem[]>([]);
   async function load() {
     setLoading(true);
+    
     const data = await getUrls();
     setUrls(data);
     setLoading(false);
+  }
+
+  async function triggerUpdate() {
+    const data = await getUrls();
+    setUrls(data);
   }
 
   useEffect(() =>{
@@ -37,7 +43,7 @@ function App() {
         {loading ? (
           <p className="mt-6 text-sm text-gray-500">Loading...</p>
         ) : (
-          <UrlTable urls={urls} refresh={load} />
+          <UrlTable urls={urls} refresh={load} update={triggerUpdate} />
         )}
       </main>
     </div>
