@@ -40,8 +40,8 @@ export default function UrlTable({ urls, refresh, update }: { urls: UrlItem[]; r
             
             <tr key={u.code} className="border-b">
               <td className="p-3">
-                <a href={u.shortUrl} target="_blank" className="text-blue-600 hover:underline"
-                onClick={()=>{update()}}>
+                <a href={u.shortUrl} target="_self" className="text-blue-600 hover:underline"
+                onClick={update}>
                   {u.shortUrl}
                 </a>
               </td>
