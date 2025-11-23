@@ -32,7 +32,7 @@ export default function UrlTable({ urls, refresh }: { urls: UrlItem[]; refresh: 
           {urls.map((u) => (
             <tr key={u.code} className="border-b">
               <td className="p-3">
-                <a href={u.shortUrl} target="_blank" className="text-blue-600 hover:underline">
+                <a href={u.shortUrl.trim()} target="_blank" className="text-blue-600 hover:underline">
                   {u.shortUrl}
                 </a>
               </td>

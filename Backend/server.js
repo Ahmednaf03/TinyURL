@@ -12,7 +12,10 @@ console.log("ENV:", process.env.DB_URL);
 
 const app = express();
 const PORT = process.env.PORT || 4000;
-
+const alloedOrigins = [
+    "http://localhost:3000",
+    "https://tiny-url-snowy.vercel.app"
+]
 app.use(cors(
     {
         origin: "https://tiny-url-snowy.vercel.app",
