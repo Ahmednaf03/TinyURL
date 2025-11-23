@@ -33,7 +33,7 @@ router.post("/", async (req, res )=>{
             longUrl : row.long_url,
             visitCount : row.visit_count,
             createdAt : row.created_at,
-            shortUrl : `${req.protocol}://${req.get("host")}/${row.code}`
+            shortUrl : `${req.protocol}://${req.get("host")}/${row.code}`.trim()
         })
     } catch (error) {
         console.log("error when creating url",error);

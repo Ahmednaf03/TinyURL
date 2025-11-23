@@ -28,6 +28,10 @@ function App() {
       </header>
 
       <main className="max-w-4xl mx-auto px-4 py-6">
+        <div>
+          <h2 className="text-lg font-medium mb-2">Create a new short URL</h2>
+          <p className='pb-3.5'>Leveraged vite+react+tailwindcss for frontend and node+express=neon for backend please refer to the readme.md for clear informations</p>
+        </div>
         <UrlForm onAdded={load} />
 
         {loading ? (

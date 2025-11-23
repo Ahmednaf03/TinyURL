@@ -1,5 +1,5 @@
 import type { UrlItem } from "../types/types";
-const BASE = "http://localhost:4000/api/urls";
+const BASE = import.meta.env.VITE_API_BASE_URL ;
 
 export async function createUrl(longurl: string): Promise<UrlItem | {error: string}> {
 const res = await fetch(BASE,{
