@@ -8,6 +8,9 @@ export default function StatusPage() {
   const [stats, setStats] = useState<UrlItem | null>(null);
   const [error, setError] = useState("");
 
+  const originalUrl = stats?.originalUrl.trim() ?? "";
+  const shortUrl = stats?.shortUrl.trim() ?? "";
+
   useEffect(() => {
     if (!code) return;
     getUrlStats(code).then((data) => {
@@ -18,49 +21,70 @@ export default function StatusPage() {
 
   if (error)
     return (
-      <div className="p-4 max-w-lg mx-auto">
-        <p className="text-red-500 text-sm mb-3">{error}</p>
-        <Link to="/" className="text-blue-600 hover:underline text-sm">
-          ← Back
-        </Link>
+      <div className="mx-auto max-w-2xl px-4 py-10">
+        <div className="rounded-[24px] border border-rose-200 bg-white p-6 shadow-[0_20px_45px_-35px_rgba(15,23,42,0.45)]">
+          <p className="mb-3 text-sm font-medium text-rose-600">{error}</p>
+          <Link to="/" className="text-sm font-semibold text-blue-700 hover:underline">
+            ← Back
+          </Link>
+        </div>
       </div>
     );
 
   if (!stats)
     return (
-      <p className="text-center text-gray-500 mt-6">Loading stats…</p>
+      <p className="mt-10 text-center text-sm font-medium text-slate-500">Loading stats...</p>
     );
 
   return (
-    <div className="p-6 max-w-lg mx-auto space-y-3 bg-white rounded-xl shadow">
-      <h2 className="text-xl font-semibold">Stats for: {code}</h2>
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.14),_transparent_32%),linear-gradient(180deg,_#f8fbff_0%,_#eef2f7_100%)] px-4 py-10">
+      <div className="mx-auto max-w-2xl rounded-[28px] border border-white/70 bg-white/80 p-6 shadow-[0_20px_60px_-35px_rgba(15,23,42,0.45)] backdrop-blur sm:p-8">
+        <div className="space-y-2">
+          <h2 className="text-2xl font-semibold tracking-tight text-slate-900">Link details</h2>
+          <p className="text-sm text-slate-500">
+            Short code:
+            <span className="ml-2 rounded-full bg-slate-100 px-3 py-1 font-medium text-slate-700">{code}</span>
+          </p>
+        </div>
 
-      <p>
-        <span className="font-medium">Original URL:</span>{" "}
-        <a href={stats.originalUrl} className="text-blue-600 hover:underline">
-          {stats.originalUrl}
-        </a>
-      </p>
+        <div className="mt-6 space-y-4 text-sm text-slate-700 sm:text-base">
+          <p>
+            <span className="mr-2 inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-600">
+              Original URL
+            </span>
+            <a href={originalUrl} className="break-all text-blue-700 hover:underline">
+              {originalUrl}
+            </a>
+          </p>
 
-      <p>
-        <span className="font-medium">Short URL:</span>{" "}
-        <a href={stats.shortUrl} className="text-blue-600 hover:underline">
-          {stats.shortUrl}
-        </a>
-      </p>
+          <p>
+            <span className="mr-2 inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-600">
+              Short URL
+            </span>
+            <a href={shortUrl} className="break-all text-blue-700 hover:underline">
+              {shortUrl}
+            </a>
+          </p>
 
-      <p>
-        <span className="font-medium">Visits:</span> {stats.visitCount}
-      </p>
+          <p>
+            <span className="mr-2 inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-600">
+              Visits
+            </span>
+            {stats.visitCount}
+          </p>
 
-      <p>
-        <span className="font-medium">Created:</span>{" "}
-        {new Date(stats.createdAt).toLocaleString()}
-      </p>
+          <p>
+            <span className="mr-2 inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-600">
+              Created
+            </span>
+            {new Date(stats.createdAt).toLocaleString()}
+          </p>
+        </div>
 
-      <Link to="/" className="text-blue-600 text-sm hover:underline">
-        ← Back
-      </Link>
+        <Link to="/" className="mt-8 inline-flex text-sm font-semibold text-blue-700 hover:underline">
+          ← Back
+        </Link>
+      </div>
     </div>
   );
 }

@@ -14,64 +14,71 @@ export default function UrlTable({ urls, refresh, update }: { urls: UrlItem[]; r
 
   if (!urls.length)
     return (
-      <div className="mt-6 p-4 bg-white rounded-xl shadow text-center text-sm text-gray-500">
+      <div className="mt-8 rounded-[24px] border border-dashed border-slate-300 bg-white/70 p-6 text-center text-sm text-slate-500">
         No URLs yet. Add one above.
       </div>
     );
 
   return (
-    <div className="mt-6 bg-white rounded-xl shadow overflow-x-auto">
-      <table className="w-full text-sm">
-        <thead className="bg-gray-100">
+    <div className="overflow-hidden rounded-[22px] border border-slate-200 bg-white shadow-[0_18px_40px_-35px_rgba(15,23,42,0.35)]">
+      <table className="w-full table-fixed text-sm">
+        <thead className="bg-slate-200 text-slate-800">
           <tr>
-            <th className="p-3">Short URL</th>
-            <th className="p-3">Original URL</th>
-            <th className="p p-3">Visits</th>
-            <th className="p-3 text-right">Actions</th>
+            <th className="w-[26%] border-b border-slate-200 px-4 py-3.5 text-left text-xs font-semibold uppercase tracking-[0.18em]">Short URL</th>
+            <th className="w-[38%] border-b border-slate-200 px-4 py-3.5 text-left text-xs font-semibold uppercase tracking-[0.18em]">Original URL</th>
+            <th className="w-[12%] border-b border-slate-200 px-4 py-3.5 text-left text-xs font-semibold uppercase tracking-[0.18em]">Visits</th>
+            <th className="w-[24%] border-b border-slate-200 px-4 py-3.5 text-left text-xs font-semibold uppercase tracking-[0.18em]">Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="divide-y divide-slate-200">
           {urls.map((u) => (
-            
-            
-            
-            <tr key={u.code} className="border-b">
-              <td className="p-3">
-                <a href={u.shortUrl} target="_self" className="text-blue-600 hover:underline"
-                onClick={update}>
+            <tr key={u.code} className="align-top transition hover:bg-slate-50/80">
+              <td className="px-4 py-3.5">
+                <a
+                  href={u.shortUrl}
+                  target="_self"
+                  className="block break-words font-medium text-blue-700 transition hover:text-blue-800 hover:underline"
+                  onClick={update}
+                >
                   {u.shortUrl}
                 </a>
               </td>
 
-              <td className="p-3 max-w-md">
-                <div className="truncate" title={u.originalUrl}>
+              <td className="px-4 py-3.5">
+                <div className="truncate text-slate-600" title={u.originalUrl}>
                   {u.originalUrl}
                 </div>
               </td>
 
-              <td className="p-3">{u.visitCount}</td>
+              <td className="px-4 py-3.5">
+                <span className="inline-flex min-w-10 justify-center rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
+                  {u.visitCount}
+                </span>
+              </td>
 
-              <td className="p-3 text-right">
-                <button
-                  onClick={() => navigator.clipboard.writeText(u.shortUrl)}
-                  className="text-blue-600 text-xs hover:underline mr-3"
-                >
-                  Copy
-                </button>
+              <td className="px-4 py-3.5">
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    onClick={() => navigator.clipboard.writeText(u.shortUrl)}
+                    className="rounded-xl border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700 transition hover:border-blue-300 hover:bg-blue-100"
+                  >
+                    Copy
+                  </button>
 
-                <button
-                  onClick={() => navigate(`/code/${u.code}`)}
-                  className="text-green-600 text-xs hover:underline mr-3"
-                >
-                  Stats
-                </button>
+                  <button
+                    onClick={() => navigate(`/code/${u.code}`)}
+                    className="rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700 transition hover:border-emerald-300 hover:bg-emerald-100"
+                  >
+                    Stats
+                  </button>
 
-                <button
-                  onClick={() => handleDelete(u.code)}
-                  className="text-red-600 text-xs hover:underline"
-                >
-                  Delete
-                </button>
+                  <button
+                    onClick={() => handleDelete(u.code)}
+                    className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-1.5 text-xs font-semibold text-rose-700 transition hover:border-rose-300 hover:bg-rose-100"
+                  >
+                    Delete
+                  </button>
+                </div>
               </td>
             </tr>
           ))}
